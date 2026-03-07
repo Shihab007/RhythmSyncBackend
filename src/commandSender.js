@@ -22,6 +22,11 @@ function sendJson(payload) {
 }
 
 function sendStart(songId = DEFAULT_SONG_ID) {
+  if (gameState.isPlaying) {
+    console.log("[SERVER] Game is already running. Stop it first before starting again.");
+    return;
+  }
+
   const sent = sendJson({
     command: "start",
     song: Number(songId)
@@ -33,6 +38,11 @@ function sendStart(songId = DEFAULT_SONG_ID) {
 }
 
 function sendStop() {
+  if (!gameState.isPlaying) {
+    console.log("[SERVER] No active game is running.");
+    return;
+  }
+
   const sent = sendJson({
     command: "stop"
   });
