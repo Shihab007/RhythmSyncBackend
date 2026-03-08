@@ -74,6 +74,16 @@ rl.on("line", (input) => {
   const [command, arg] = input.trim().split(/\s+/);
 
   switch (command) {
+    case "stopafter":
+    {
+        const seconds = Number(arg || 3);
+        console.log(`[SERVER] Will send stop in ${seconds} second(s)...`);
+        setTimeout(() => {
+        sendStop();
+        }, seconds * 1000);
+    }
+    break;
+
     case "start":
       sendStart(arg || 1);
       break;
